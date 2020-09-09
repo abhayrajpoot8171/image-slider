@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+<title>gallery slider</title>
+    <style>
+   
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+        body {
+            height: 100vh;
+            width: 100wh;
+            background: linear-gradient(to right, #59d97b, #59d9c6,#9dc2bc,#0fdbd8);
+        }
+        .slider{
+            
+            width:55.5%;
+            border:10px solid black;
+            margin: auto;
+            overflow: hidden;
+           
+        }
+        .slides {
+            display: flex;
+    
+        }
+
+
+ .prevButton {
+            
+ 
+    position: absolute;
+   top: 50%;
+   z-index: 10;
+    left: 15%;
+    font-size: 22px;
+     padding:10px 20px;
+     opacity: 0.8;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.nextButton{
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    right: 15%;
+    font-size: 22px;
+    color: black;
+    border-radius: 10px;
+    padding:10px 20px;
+    cursor: pointer;
+    opacity:0.8;
+}
+        .heading {
+            width:40%;
+            margin:auto;
+            padding-left: 140px;
+            padding-top:20px;
+            padding-bottom: 30px;
+        } 
+        .imgS {
+   z-index: 10;            
+        }
+
+    </style>
+    
+</head>
+<body>
+<header>
+    <h1 class="heading"> IMAGE SLIDER</h1>
+    
+    
+    </header>
+    <div class="slider">
+        <div class="slides">
+            <img class="imgF"  src="https://images.unsplash.com/photo-1541327079290-5127e8c6d7b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" id="lastclone">
+            <img class="imgS" src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+            <img class="slide" src="https://images.unsplash.com/photo-1541423408854-5df732b6f6d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+        <img class="slide" src="https://images.unsplash.com/photo-1541436293327-8f104af135eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" >
+        
+        <img class="slide" src="https://images.unsplash.com/photo-1541336528065-8f1fdc435835?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+        <img class="slide" src="https://images.unsplash.com/photo-1541327079290-5127e8c6d7b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+        <img class="slide" src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" id="firstClone">
+        
+            
+            </div>
+        <button class="prevButton">prev</button>
+        <button class="nextButton">Next</button>
+       
+    </div>
+    <script>
+       //SELECTORS
+     
+    //const slider = document.querySelector(".slider");
+    const slides     = document.querySelector(".slides");
+    const prevButton = document.querySelector(".prevButton");
+    const nextButton = document.querySelector(".nextButton");
+    const images     = document.querySelectorAll(".slides img");
+       
+        let counter = 1;
+        let width = images[0].clientWidth;
+    
+       // slides.style.transform = 'translateX(' +(-width * counter) +' px)';
+  
+    //FUNCTIONS
+    
+    function nextSlide() {
+        if(counter >= images.length - 1) return;
+        slides.style.transition = "transform 0.3s ease";
+        
+        counter++;
+        console.log(counter);
+        console.log("next slide button working");
+        slides.style.transform = 'translateX(' + (-width * counter) + 'px)';
+    
+    }
+     
+     function prevSlide() {
+         if(counter <=0) return;
+        slides.style.transition = "transform 0.3s ease";
+        
+        counter--;
+        console.log(counter);
+        console.log("next slide button working");
+        slides.style.transform = 'translateX(' + (-width * counter) + 'px)';
+        
+        
+    }
+
+function animate() {
+   // if(slides[counter].id === "cloneLast") {
+       // slides.style.transition = "none";
+    
+    //counter = images.length-2;
+    //slides.style.transform = 'translateX(' + (-width * counter) + 'px)';
+   // }
+     if(images[counter].id === 'lastClone'){
+    slides.style.transition = 'none';
+    counter = images.length - 2;
+    console.log(counter);
+    slides.style.transform ='translateX(' + (-width * counter) + 'px)';
+  }
+     if(images[counter].id === 'firstClone'){
+    slides.style.transition = 'none';
+    counter = images.length - counter;
+    console.log(counter);
+    slides.style.transform ='translateX(' + (-width * counter) + 'px)';
+  }
+
+}
+    
+    //EVENTLISTNERS
+        
+   nextButton.addEventListener("click", nextSlide);
+   prevButton.addEventListener("click",prevSlide);
+   slides.addEventListener("transitionend",animate);
+ 
+        console.log(images[counter]);
+ 
+        
+    </script>
+    
+</body>
